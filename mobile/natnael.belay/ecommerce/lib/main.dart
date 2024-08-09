@@ -1,3 +1,6 @@
+import 'package:ecommerce/addpage.dart';
+import 'package:ecommerce/details.dart';
+import 'package:ecommerce/searchpage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,7 +10,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,8 +23,56 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
+
+  @override
+  _MyHomePage createState() => _MyHomePage();
+}
+
+class _MyHomePage extends State<MyHomePage> {
+  List<Widget> cardList = [];
+
+  void _addCard(String name, double? price) {
+    setState(() {
+      cardList.add(
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const MydetailPage()));
+          },
+          child: Card(
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              children: [
+                Image.asset('images/b.jpeg'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(name),
+                      Text("\$$price"),
+                    ],
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Men's Shoes"),
+                      Text("(4.0)"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,51 +102,42 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(children: _buildCard(10)),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              const SizedBox(width: 10),
+              const Text("Available Products", style: TextStyle(fontSize: 24)),
+              const Spacer(),
+              IconButton(
+                icon: const Icon(Icons.search_rounded),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const SearchPage()));
+                },
+              ),
+            ],
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ListView(children: cardList),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-				backgroundColor: Colors.blueAccent,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddPage(addCard: _addCard),
+            ),
+          );
+        },
+        backgroundColor: Colors.blueAccent,
         child: const Icon(Icons.add),
       ),
     );
   }
-}
-
-List<Card> _buildCard(int count) {
-  List<Card> card = List.generate(
-    count,
-    (int index) {
-      return Card(
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          children: [
-            Image.asset('images/b.jpeg'),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Derby Leather Shoes",
-                ),
-                Text(
-                  "\$120",
-                ),
-              ],
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("men's shoes"),
-                Text(
-                  "(4.0)",
-                ),
-              ],
-            )
-          ],
-        ),
-      );
-    },
-  );
-  return card;
 }

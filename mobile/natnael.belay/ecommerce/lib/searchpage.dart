@@ -28,8 +28,11 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(
-          Icons.arrow_back_ios_new_rounded,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+					onPressed: (){
+						Navigator.pop(context);
+					},
         ),
         title: Container(
           margin: const EdgeInsets.symmetric(horizontal: 65.0),

@@ -1,48 +1,41 @@
-import "package:flutter/material.dart";
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  build(BuildContext context) {
-    return MaterialApp(
-      title: "Flutter Demo",
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const AddPage(),
-    );
-  }
-}
+import 'package:flutter/material.dart';
 
 class AddPage extends StatelessWidget {
-  const AddPage({super.key});
+  final Function(String, double?) addCard;
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+
+  AddPage({required this.addCard, super.key});
+
+  void _submit(BuildContext context) {
+    final String name = _nameController.text;
+    final double? price = double.tryParse(_priceController.text);
+    if (name.isNotEmpty && price != null) {
+      addCard(name, price);
+      Navigator.pop(context); // Close the AddPage after submitting
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true, // Ensure the UI avoids the keyboard
       appBar: AppBar(
-        leading: const Icon(
-          Icons.arrow_back_ios_new_rounded,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(Icons.arrow_back_ios_new_rounded),
         ),
-        title: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 65.0),
-          child: const Text("Add Product"),
-        ),
+        title: const Center(child: Text("Add Product")),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Container(
-              width: 366,
+              width: double.infinity,
               height: 190,
               decoration: BoxDecoration(
                 border: Border.all(color: const Color(0xFFF3F3F3), width: 2),
@@ -61,44 +54,32 @@ class AddPage extends StatelessWidget {
                 ),
               ),
             ),
-            const Text("name:"),
-            const TextField(
-              decoration: InputDecoration(
+            const SizedBox(height: 16),
+            const Text("Name:"),
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
                 border: InputBorder.none,
                 fillColor: Color(0xFFF3F3F3),
                 filled: true,
               ),
             ),
-            const Text("Catagory:"),
-            const TextField(
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                fillColor: Color(0xFFF3F3F3),
-                filled: true,
-              ),
-            ),
+            const SizedBox(height: 16),
             const Text("Price:"),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: _priceController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
                 border: InputBorder.none,
                 fillColor: Color(0xFFF3F3F3),
                 filled: true,
               ),
             ),
-            const Text("Description: "),
-            Container(
-              width: 366,
-              height: 169,
-              decoration: BoxDecoration(
-                border: Border.all(color: const Color(0xFFF3F3F3), width: 2),
-                borderRadius: BorderRadius.circular(12),
-                color: const Color(0xFFF3F3F3),
-              ),
-            ),
+            const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () => _submit(context),
               style: ElevatedButton.styleFrom(
-                minimumSize: const Size(366, 50),
+                minimumSize: const Size(double.infinity, 50),
                 backgroundColor: const Color(0xFF3F51F3),
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(
@@ -114,7 +95,7 @@ class AddPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                minimumSize: const Size(366, 50),
+                minimumSize: const Size(double.infinity, 50),
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(

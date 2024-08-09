@@ -128,19 +128,20 @@ List<Card> _buildCard(int count) {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Hello",
+                  "Derby Leather Shoes",
+									style: TextStyle(fontSize: 25)
                 ),
                 Text(
-                  "World",
+                  "\$120",
                 ),
               ],
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("World"),
+                Text("men's shoe"),
                 Text(
-                  "Hello",
+                  "(4.0)",
                 ),
               ],
             )

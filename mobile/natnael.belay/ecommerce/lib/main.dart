@@ -39,7 +39,10 @@ class _MyHomePage extends State<MyHomePage> {
         GestureDetector(
           onTap: () {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const MydetailPage()));
+              MaterialPageRoute(
+                builder: (context) => MydetailPage(),
+              ),
+            );
           },
           child: Card(
             clipBehavior: Clip.antiAlias,
@@ -51,7 +54,7 @@ class _MyHomePage extends State<MyHomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(name),
+                      Text(name, style: const TextStyle(fontSize: 24)),
                       Text("\$$price"),
                     ],
                   ),

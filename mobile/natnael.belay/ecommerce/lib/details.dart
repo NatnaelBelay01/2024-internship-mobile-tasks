@@ -1,25 +1,5 @@
 import "package:flutter/material.dart";
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  build(BuildContext context) {
-    return MaterialApp(
-      title: "Flutter Demo",
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MydetailPage(),
-    );
-  }
-}
-
 class MydetailPage extends StatelessWidget {
   const MydetailPage({super.key});
 
@@ -30,32 +10,33 @@ class MydetailPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-					width: double.infinity,
-					height: 269,
-					child: Stack(
-            children: [
-              Positioned.fill(
-                child: Image.asset(
-                  "images/b.jpeg",
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Positioned(
-                top: 16,
-                left: 16,
-                child: FloatingActionButton(
-                  onPressed: () {},
-									backgroundColor: Colors.white,
-									foregroundColor: Colors.black,
-									mini: true,
-									shape: const RoundedRectangleBorder(
-											borderRadius: BorderRadius.all(Radius.circular(30))
-										),
-                  child: const Icon(Icons.arrow_back_ios_new_rounded),
-                ),
-              ),
-            ],
-          ) ),
+              width: double.infinity,
+              height: 269,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Image.asset(
+                      "images/b.jpeg",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                    top: 16,
+                    left: 16,
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      mini: true,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                      child: const Icon(Icons.arrow_back_ios_new_rounded),
+                    ),
+                  ),
+                ],
+              )),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -1,4 +1,3 @@
-
 import "package:flutter/material.dart";
 
 void main() {
@@ -30,9 +29,9 @@ class SearchPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
-					onPressed: (){
-						Navigator.pop(context);
-					},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: Container(
           margin: const EdgeInsets.symmetric(horizontal: 65.0),
@@ -46,10 +45,10 @@ class SearchPage extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
+                  const SizedBox(
                     width: 270,
                     height: 48,
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
                         suffixIcon: Icon(Icons.arrow_forward_rounded),
                         border: OutlineInputBorder(),
@@ -58,7 +57,7 @@ class SearchPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Container(
+                  SizedBox(
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
@@ -74,17 +73,25 @@ class SearchPage extends StatelessWidget {
                                       MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text("Catagory"),
-                                    Container(
-                                      width: 270,
+                                    const Text("Catagory", style: TextStyle(fontSize: 20),),
+                                    const SizedBox(
+                                      width: 290,
                                       height: 48,
-                                      child: const TextField(
+                                      child: TextField(
                                         decoration: InputDecoration(
                                           border: OutlineInputBorder(),
                                         ),
                                       ),
                                     ),
-																		const Text("Price"),
+                                    const Text("Price"),
+                                    RangeSlider(
+                                      values: const RangeValues(20, 80),
+                                      min: 0,
+                                      max: 100,
+                                      divisions: 10,
+                                      labels: const RangeLabels('20', '80'),
+                                      onChanged: null,
+                                    ),
                                   ],
                                 ),
                               );
@@ -130,10 +137,7 @@ List<Card> _buildCard(int count) {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Derby Leather Shoes",
-									style: TextStyle(fontSize: 25)
-                ),
+                Text("Derby Leather Shoes", style: TextStyle(fontSize: 25)),
                 Text(
                   "\$120",
                 ),

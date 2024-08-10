@@ -4,22 +4,24 @@ class AddPage extends StatelessWidget {
   final Function(String, double?) addCard;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _desController = TextEditingController();
 
   AddPage({required this.addCard, super.key});
 
   void _submit(BuildContext context) {
     final String name = _nameController.text;
     final double? price = double.tryParse(_priceController.text);
-    if (name.isNotEmpty && price != null) {
+		final String description = _desController.text;
+    if (name.isNotEmpty && price != null && description.isNotEmpty) {
       addCard(name, price);
-      Navigator.pop(context); // Close the AddPage after submitting
+      Navigator.pop(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // Ensure the UI avoids the keyboard
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         leading: GestureDetector(
           onTap: () {
@@ -75,7 +77,17 @@ class AddPage extends StatelessWidget {
                 filled: true,
               ),
             ),
-            const SizedBox(height: 16),
+            const Text("Description:"),
+            TextField(
+              controller: _desController,
+              decoration: const InputDecoration(
+                contentPadding: EdgeInsets.symmetric(vertical: 80),
+                border: InputBorder.none,
+                fillColor: Color(0xFFF3F3F3),
+                filled: true,
+              ),
+            ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => _submit(context),
               style: ElevatedButton.styleFrom(
@@ -91,6 +103,9 @@ class AddPage extends StatelessWidget {
                 foregroundColor: Colors.white,
               ),
               child: const Text("ADD"),
+            ),
+            const SizedBox(
+              height: 16,
             ),
             ElevatedButton(
               onPressed: () {},

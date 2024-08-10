@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,9 +8,9 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  build(BuildContext context) {
+  MaterialApp build(BuildContext context) {
     return MaterialApp(
-      title: "Flutter Demo",
+      title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -35,7 +35,7 @@ class SearchPage extends StatelessWidget {
         ),
         title: Container(
           margin: const EdgeInsets.symmetric(horizontal: 65.0),
-          child: const Text("Search Product"),
+          child: const Text('Search Product'),
         ),
       ),
       body: SingleChildScrollView(
@@ -73,7 +73,7 @@ class SearchPage extends StatelessWidget {
                                       MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text("Catagory", style: TextStyle(fontSize: 20),),
+                                    const Text('Catagory', style: TextStyle(fontSize: 20),),
                                     const SizedBox(
                                       width: 290,
                                       height: 48,
@@ -83,7 +83,7 @@ class SearchPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    const Text("Price"),
+                                    const Text('Price'),
                                     RangeSlider(
                                       values: const RangeValues(20, 80),
                                       min: 0,
@@ -137,9 +137,9 @@ List<Card> _buildCard(int count) {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Derby Leather Shoes", style: TextStyle(fontSize: 25)),
+                Text('Derby Leather Shoes', style: TextStyle(fontSize: 25)),
                 Text(
-                  "\$120",
+                  '\$120',
                 ),
               ],
             ),
@@ -148,7 +148,7 @@ List<Card> _buildCard(int count) {
               children: [
                 Text("men's shoe"),
                 Text(
-                  "(4.0)",
+                  '(4.0)',
                 ),
               ],
             )

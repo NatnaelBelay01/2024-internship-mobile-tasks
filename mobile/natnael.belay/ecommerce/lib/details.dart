@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 class MydetailPage extends StatelessWidget {
   const MydetailPage({super.key});
@@ -16,7 +16,7 @@ class MydetailPage extends StatelessWidget {
                 children: [
                   Positioned.fill(
                     child: Image.asset(
-                      "images/b.jpeg",
+                      'images/b.jpeg',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -41,21 +41,21 @@ class MydetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("Men's Shoe"),
-              Text("Ratings"),
+              Text('Ratings'),
             ],
           ),
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Derby Leather",
+                'Derby Leather',
                 style: TextStyle(fontSize: 30),
               ),
-              Text("\$120"),
+              Text('\$120'),
             ],
           ),
           const Text(
-            "Size: ",
+            'Size: ',
           ),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -76,7 +76,7 @@ class MydetailPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: const Text("39"),
+                        child: const Text('39'),
                       ),
                       const SizedBox(
                         width: 10,
@@ -89,7 +89,7 @@ class MydetailPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: const Text("40"),
+                        child: const Text('40'),
                       ),
                       const SizedBox(
                         width: 10,
@@ -102,7 +102,7 @@ class MydetailPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: const Text("41"),
+                        child: const Text('41'),
                       ),
                       const SizedBox(
                         width: 10,
@@ -115,7 +115,7 @@ class MydetailPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: const Text("42"),
+                        child: const Text('42'),
                       ),
                       const SizedBox(
                         width: 10,
@@ -128,7 +128,7 @@ class MydetailPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: const Text("43"),
+                        child: const Text('43'),
                       ),
                     ],
                   ),
@@ -137,7 +137,7 @@ class MydetailPage extends StatelessWidget {
             ),
           ),
           const Text(
-            "A derby leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.",
+            'A derby leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.',
             style: TextStyle(
               fontSize: 16,
             ),
@@ -161,7 +161,7 @@ class MydetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text("Delete"),
+                  child: const Text('Delete'),
                 ),
               ),
               Container(
@@ -176,7 +176,7 @@ class MydetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text("Update"),
+                  child: const Text('Update'),
                 ),
               ),
             ],

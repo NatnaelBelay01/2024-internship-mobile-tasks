@@ -1,7 +1,8 @@
-import 'package:ecommerce/addpage.dart';
-import 'package:ecommerce/details.dart';
-import 'package:ecommerce/searchpage.dart';
 import 'package:flutter/material.dart';
+
+import 'addpage.dart';
+import 'details.dart';
+import 'searchpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,7 +41,7 @@ class _MyHomePage extends State<MyHomePage> {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => MydetailPage(),
+                builder: (context) => const MydetailPage(),
               ),
             );
           },
@@ -55,7 +56,7 @@ class _MyHomePage extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(name, style: const TextStyle(fontSize: 24)),
-                      Text("\$$price"),
+                      Text('\$$price'),
                     ],
                   ),
                 ),
@@ -65,7 +66,7 @@ class _MyHomePage extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Men's Shoes"),
-                      Text("(4.0)"),
+                      Text('(4.0)'),
                     ],
                   ),
                 ),
@@ -88,12 +89,12 @@ class _MyHomePage extends State<MyHomePage> {
         title: const Column(
           children: [
             Text(
-              "Aug 6, 2024",
+              'Aug 6, 2024',
               style: TextStyle(fontSize: 15),
             ),
             SizedBox(height: 2),
             Text(
-              "Hello, User",
+              'Hello, User',
               style: TextStyle(fontSize: 15),
             ),
           ],
@@ -110,7 +111,7 @@ class _MyHomePage extends State<MyHomePage> {
           Row(
             children: [
               const SizedBox(width: 10),
-              const Text("Available Products", style: TextStyle(fontSize: 24)),
+              const Text('Available Products', style: TextStyle(fontSize: 24)),
               const Spacer(),
               IconButton(
                 icon: const Icon(Icons.search_rounded),

@@ -29,7 +29,7 @@ class AddPage extends StatelessWidget {
           },
           child: const Icon(Icons.arrow_back_ios_new_rounded),
         ),
-        title: const Center(child: Text("Add Product")),
+        title: const Center(child: Text('Add Product')),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -51,13 +51,13 @@ class AddPage extends StatelessWidget {
                   children: [
                     Icon(Icons.insert_photo_outlined,
                         color: Colors.grey[700], size: 40),
-                    const Text("Upload Photo")
+                    const Text('Upload Photo')
                   ],
                 ),
               ),
             ),
             const SizedBox(height: 16),
-            const Text("Name:"),
+            const Text('Name:'),
             TextField(
               controller: _nameController,
               decoration: const InputDecoration(
@@ -67,7 +67,7 @@ class AddPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const Text("Price:"),
+            const Text('Price:'),
             TextField(
               controller: _priceController,
               keyboardType: TextInputType.number,
@@ -77,7 +77,7 @@ class AddPage extends StatelessWidget {
                 filled: true,
               ),
             ),
-            const Text("Description:"),
+            const Text('Description:'),
             TextField(
               controller: _desController,
               decoration: const InputDecoration(
@@ -102,7 +102,7 @@ class AddPage extends StatelessWidget {
                 ),
                 foregroundColor: Colors.white,
               ),
-              child: const Text("ADD"),
+              child: const Text('ADD'),
             ),
             const SizedBox(
               height: 16,
@@ -121,7 +121,7 @@ class AddPage extends StatelessWidget {
                 ),
                 foregroundColor: Colors.redAccent,
               ),
-              child: const Text("Delete"),
+              child: const Text('Delete'),
             ),
           ],
         ),

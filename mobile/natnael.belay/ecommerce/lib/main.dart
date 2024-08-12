@@ -33,48 +33,66 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePage extends State<MyHomePage> {
   List<Widget> cardList = [];
+  Map<String, Widget> cardmap = {};
 
-  void _addCard(String name, double? price) {
+  void _addCard(String name, double price, String description) {
     setState(() {
-      cardList.add(
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const MydetailPage(),
+      cardmap[name] = GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => MydetailPage(
+                description: description,
+                name: name,
+                price: price,
+                deleteCard: _deleteCard,
               ),
-            );
-          },
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                Image.asset('images/b.jpeg'),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(name, style: const TextStyle(fontSize: 24)),
-                      Text('\$$price'),
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Men's Shoes"),
-                      Text('(4.0)'),
-                    ],
-                  ),
-                ),
-              ],
             ),
+          );
+        },
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            children: [
+              Image.asset('images/b.jpeg'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(name, style: const TextStyle(fontSize: 24)),
+                    Text('\$$price'),
+                  ],
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Men's Shoes"),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow,
+                        ),
+                        Text('(4.0)'),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       );
+    });
+  }
+
+  void _deleteCard(String name) {
+    setState(() {
+      cardmap.remove(name);
     });
   }
 
@@ -116,8 +134,13 @@ class _MyHomePage extends State<MyHomePage> {
               IconButton(
                 icon: const Icon(Icons.search_rounded),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const SearchPage()));
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SearchPage(
+                        cardmap: cardmap,
+                      ),
+                    ),
+                  );
                 },
               ),
             ],
@@ -125,7 +148,7 @@ class _MyHomePage extends State<MyHomePage> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: ListView(children: cardList),
+              child: ListView(children: cardmap.values.toList()),
             ),
           ),
         ],

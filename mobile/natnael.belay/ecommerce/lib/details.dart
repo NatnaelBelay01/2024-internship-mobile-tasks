@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
 class MydetailPage extends StatelessWidget {
-  const MydetailPage({super.key});
+  final String description;
+  final String name;
+  final double price;
+  final Function(String) deleteCard;
+
+  const MydetailPage(
+      {required this.description,
+      required this.name,
+      required this.price,
+      super.key,
+      required this.deleteCard});
 
   @override
   Widget build(BuildContext context) {
@@ -41,17 +51,25 @@ class MydetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("Men's Shoe"),
-              Text('Ratings'),
+              Row(
+                children: [
+                  Icon(
+                    Icons.star,
+                    color: Colors.yellow,
+                  ),
+                  Text('(4.0)'),
+                ],
+              ),
             ],
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Derby Leather',
-                style: TextStyle(fontSize: 30),
+                name,
+                style: const TextStyle(fontSize: 30),
               ),
-              Text('\$120'),
+              Text('\$ ${price.toString()}'),
             ],
           ),
           const Text(
@@ -136,10 +154,13 @@ class MydetailPage extends StatelessWidget {
               ],
             ),
           ),
-          const Text(
-            'A derby leather shoe is a classic and versatile footwear option characterized by its open lacing system, where the shoelace eyelets are sewn on top of the vamp (the upper part of the shoe). This design feature provides a more relaxed and casual look compared to the closed lacing system of oxford shoes. Derby shoes are typically made of high-quality leather, known for its durability and elegance, making them suitable for both formal and casual occasions. With their timeless style and comfortable fit, derby leather shoes are a staple in any well-rounded wardrobe.',
-            style: TextStyle(
-              fontSize: 16,
+          SizedBox(
+            height: 270,
+            child: Text(
+              description,
+              style: const TextStyle(
+                fontSize: 16,
+              ),
             ),
           ),
           Row(
@@ -148,7 +169,10 @@ class MydetailPage extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.all(20),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    deleteCard(name);
+                    Navigator.pop(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.redAccent,

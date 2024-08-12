@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class SearchPage extends StatefulWidget {
+  final Map<String, Widget> cardmap;
+  const SearchPage({required this.cardmap, super.key});
   @override
-  MaterialApp build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const SearchPage(),
-    );
+  _SearchPage createState() => _SearchPage();
+  Map<String, Widget> getcard() {
+    return cardmap;
   }
 }
 
-class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
+class _SearchPage extends State<SearchPage> {
+  final TextEditingController searchcontroller = TextEditingController();
+  List<Widget> searchresult = [];
+  Map<String, Widget> allResults = {};
+  @override
+  void initState() {
+    super.initState();
+    searchresult = widget.getcard().values.toList();
+    allResults = widget.getcard();
+  }
+
+  void searchResults(String name) {
+    if (allResults.containsKey(name)) {
+      setState(() {
+        searchresult = [];
+        searchresult.add(allResults[name] ?? const Card());
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +52,17 @@ class SearchPage extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     width: 270,
                     height: 48,
                     child: TextField(
+                      controller: searchcontroller,
                       decoration: InputDecoration(
-                        suffixIcon: Icon(Icons.arrow_forward_rounded),
-                        border: OutlineInputBorder(),
+                        suffixIcon: IconButton(
+                            onPressed: () =>
+                                searchResults(searchcontroller.text),
+                            icon: const Icon(Icons.arrow_forward_rounded)),
+                        border: const OutlineInputBorder(),
                         hintText: 'Leather',
                       ),
                     ),
@@ -73,7 +84,10 @@ class SearchPage extends StatelessWidget {
                                       MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('Catagory', style: TextStyle(fontSize: 20),),
+                                    const Text(
+                                      'Catagory',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
                                     const SizedBox(
                                       width: 290,
                                       height: 48,
@@ -115,7 +129,7 @@ class SearchPage extends StatelessWidget {
                 ],
               ),
               Column(
-                children: _buildCard(20),
+                children: searchresult,
               ),
             ],
           ),

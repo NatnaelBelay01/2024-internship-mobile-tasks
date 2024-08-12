@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddPage extends StatelessWidget {
-  final Function(String, double?) addCard;
+  final Function(String, double, String) addCard;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _desController = TextEditingController();
@@ -13,7 +13,7 @@ class AddPage extends StatelessWidget {
     final double? price = double.tryParse(_priceController.text);
 		final String description = _desController.text;
     if (name.isNotEmpty && price != null && description.isNotEmpty) {
-      addCard(name, price);
+      addCard(name, price, description);
       Navigator.pop(context);
     }
   }

@@ -7,7 +7,7 @@ class Insertproduct{
 
 	Insertproduct({required this.productrepo});
 
-	Product insert(Product product){
-		return productrepo.createProduct(product);
+	Future<Product> call(Product product) async {
+		return await productrepo.createProduct(product);
 	}
 }

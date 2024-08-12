@@ -6,7 +6,7 @@ class UpdateProduct {
 
 	UpdateProduct({required this.productRepo});
 
-	Product update(Product product){
-		return productRepo.updateProduct(product);
+	Future<Product> call(Product product) async {
+		return await productRepo.updateProduct(product);
 	}
 }

@@ -7,7 +7,7 @@ class DeleteProduct{
 
 	DeleteProduct({required this.productrepo});
 
-	void remove(String id){
-		productrepo.deleteProduct(id);
+	Future<void> call(String id) async {
+		await productrepo.deleteProduct(id);
 	}
 }

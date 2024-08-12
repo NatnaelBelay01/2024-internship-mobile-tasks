@@ -7,7 +7,7 @@ class GetProduct{
 
 	GetProduct({required this.productrepo});
 
-	Product getpro(String id){
-		return productrepo.getProuduct(id);
+	Future<Product> call(String id) async {
+		return await productrepo.getProuduct(id);
 	}
 }

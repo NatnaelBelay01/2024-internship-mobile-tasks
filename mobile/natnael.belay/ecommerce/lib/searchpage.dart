@@ -75,40 +75,57 @@ class _SearchPage extends State<SearchPage> {
                         showModalBottomSheet(
                             context: context,
                             builder: (BuildContext context) {
-                              return Container(
-                                height: 300,
-                                width: double.infinity,
-                                color: Colors.white,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      'Catagory',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    const SizedBox(
-                                      width: 290,
-                                      height: 48,
-                                      child: TextField(
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
+                              return Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Container(
+                                    height: 350,
+                                    width: double.infinity,
+                                    color: Colors.white,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'Catagory',
+                                          style: TextStyle(fontSize: 20),
                                         ),
-                                      ),
+                                        const SizedBox(
+                                          width: double.infinity,
+                                          height: 48,
+                                          child: TextField(
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(),
+                                            ),
+                                          ),
+                                        ),
+                                        const Text('Price'),
+                                        RangeSlider(
+                                          values: const RangeValues(20, 80),
+                                          min: 0,
+                                          max: 100,
+                                          divisions: 10,
+																					inactiveColor: Colors.grey,
+																					activeColor: Colors.blue,
+                                          labels: const RangeLabels('20', '80'),
+                                          onChanged: (RangeValues newValues){},
+                                        ),
+                                        SizedBox(
+                                          width: double.infinity,
+                                          height: 40,
+                                          child: ElevatedButton(
+                                            onPressed: () {},
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.blue,
+                                              foregroundColor: Colors.white,
+                                            ),
+                                            child: const Text('Apply'),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    const Text('Price'),
-                                    RangeSlider(
-                                      values: const RangeValues(20, 80),
-                                      min: 0,
-                                      max: 100,
-                                      divisions: 10,
-                                      labels: const RangeLabels('20', '80'),
-                                      onChanged: null,
-                                    ),
-                                  ],
-                                ),
-                              );
+                                  ));
                             });
                       },
                       style: ElevatedButton.styleFrom(

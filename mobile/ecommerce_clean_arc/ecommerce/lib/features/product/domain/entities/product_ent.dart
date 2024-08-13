@@ -6,9 +6,11 @@ class Product {
   final String imageurl;
 
   Product(
-      {required this.id,
+      {
+			required this.id,
       required this.name,
       required this.description,
       required this.price,
-      required this.imageurl});
+      required this.imageurl
+	});
 }

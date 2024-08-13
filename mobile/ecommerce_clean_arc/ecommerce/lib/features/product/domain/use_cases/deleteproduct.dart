@@ -1,5 +1,4 @@
 import "../repositories/productrepositories.dart";
-import "../entities/product_ent.dart";
 
 
 class DeleteProduct{

@@ -2,6 +2,7 @@ import 'package:ecommerce/features/product/domain/use_cases/deleteproduct.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../../helpers/test_helper.mocks.dart';
+import 'package:dartz/dartz.dart';
 
 
 void main(){
@@ -18,7 +19,7 @@ void main(){
 
 	test('this tests the delete', () async {
 
-		when(mockrepo.deleteProduct(id)).thenAnswer((_) async {});
+		when(mockrepo.deleteProduct(id)).thenAnswer((_) async => Right(deleteprod));
 
 		await deleteprod(id);
 

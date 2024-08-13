@@ -3,7 +3,7 @@ import 'package:ecommerce/features/product/domain/use_cases/updateproduct.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../../helpers/test_helper.mocks.dart';
-
+import 'package:dartz/dartz.dart';
 
 void main(){
 	late MockProductRepositories mockrepo;
@@ -18,11 +18,11 @@ void main(){
 
 	test('a test for the update repo', () async {
 
-		when(mockrepo.updateProduct(product)).thenAnswer((_) async => product);
+		when(mockrepo.updateProduct(product)).thenAnswer((_) async => Right(product));
 
 		final result = await updateprod(product);
 
-		expect(result, product);
+		expect(result, Right(product));
 
 	});
 }

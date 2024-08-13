@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:ecommerce/features/product/domain/use_cases/getproduct.dart';
 import '../../helpers/test_helper.mocks.dart';
+import 'package:dartz/dartz.dart';
 
 void main(){
 
@@ -18,11 +19,11 @@ void main(){
 	const id = '1';
 	test('should use the repo to get the product', () async {  
 		
-		when(mockrepo.getProuduct(id)).thenAnswer((_) async => product);
+		when(mockrepo.getProuduct(id)).thenAnswer((_) async => Right(product));
 
 		final result = await getproduct(id);
 
-		expect(result, product);
+		expect(result, Right(product));
 		
 	});
 }

@@ -1,4 +1,5 @@
 import 'package:mockito/mockito.dart';
+import 'package:dartz/dartz.dart';
 import 'package:ecommerce/features/product/domain/use_cases/insertproduct.dart';
 import '../../helpers/test_helper.mocks.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,7 +14,7 @@ void main() {
     insertprod = Insertproduct(productrepo: mockrepo);
   });
 
-  final product = Product(
+  const product = Product(
       id: '1',
       name: 'shoe',
       price: 33,
@@ -23,9 +24,9 @@ void main() {
   test(
     'This should insert to the repo',
     () async {
-      when(mockrepo.createProduct(product)).thenAnswer((_) async => product);
+      when(mockrepo.createProduct(product)).thenAnswer((_) async => const Right(product));
       final result = await insertprod.call(product);
-      expect(result, product);
+      expect(result, const Right(product));
     },
   );
 }

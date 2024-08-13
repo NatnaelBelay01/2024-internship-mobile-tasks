@@ -5,8 +5,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
+import 'package:dartz/dartz.dart' as _i2;
+import 'package:ecommerce/core/error/failure.dart' as _i5;
 import 'package:ecommerce/features/product/domain/entities/product_ent.dart'
-    as _i2;
+    as _i6;
 import 'package:ecommerce/features/product/domain/repositories/productrepositories.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
@@ -24,8 +26,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeProduct_0 extends _i1.SmartFake implements _i2.Product {
-  _FakeProduct_0(
+class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
+  _FakeEither_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -44,59 +46,72 @@ class MockProductRepositories extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Product> createProduct(_i2.Product? product) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i6.Product>> createProduct(
+          _i6.Product? product) =>
       (super.noSuchMethod(
         Invocation.method(
           #createProduct,
           [product],
         ),
-        returnValue: _i4.Future<_i2.Product>.value(_FakeProduct_0(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.Product>>.value(
+            _FakeEither_0<_i5.Failure, _i6.Product>(
           this,
           Invocation.method(
             #createProduct,
             [product],
           ),
         )),
-      ) as _i4.Future<_i2.Product>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Product>>);
 
   @override
-  _i4.Future<_i2.Product> updateProduct(_i2.Product? product) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i6.Product>> updateProduct(
+          _i6.Product? product) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateProduct,
           [product],
         ),
-        returnValue: _i4.Future<_i2.Product>.value(_FakeProduct_0(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.Product>>.value(
+            _FakeEither_0<_i5.Failure, _i6.Product>(
           this,
           Invocation.method(
             #updateProduct,
             [product],
           ),
         )),
-      ) as _i4.Future<_i2.Product>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Product>>);
 
   @override
-  _i4.Future<void> deleteProduct(String? id) => (super.noSuchMethod(
+  _i4.Future<_i2.Either<_i5.Failure, void>> deleteProduct(String? id) =>
+      (super.noSuchMethod(
         Invocation.method(
           #deleteProduct,
           [id],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, void>>.value(
+            _FakeEither_0<_i5.Failure, void>(
+          this,
+          Invocation.method(
+            #deleteProduct,
+            [id],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, void>>);
 
   @override
-  _i4.Future<_i2.Product> getProuduct(String? id) => (super.noSuchMethod(
+  _i4.Future<_i2.Either<_i5.Failure, _i6.Product>> getProuduct(String? id) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getProuduct,
           [id],
         ),
-        returnValue: _i4.Future<_i2.Product>.value(_FakeProduct_0(
+        returnValue: _i4.Future<_i2.Either<_i5.Failure, _i6.Product>>.value(
+            _FakeEither_0<_i5.Failure, _i6.Product>(
           this,
           Invocation.method(
             #getProuduct,
             [id],
           ),
         )),
-      ) as _i4.Future<_i2.Product>);
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.Product>>);
 }

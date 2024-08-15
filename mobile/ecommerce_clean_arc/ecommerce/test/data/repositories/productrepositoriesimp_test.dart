@@ -82,9 +82,7 @@ void main() {
       when(mocknetwork.isConnected).thenAnswer((_) async => false);
     });
 
-    test(
-        'should return Failure',
-        () async {
+    test('should return Failure', () async {
       when(mockremote.createProduct(any)).thenThrow(ServerException());
       when(mocklocal.cacheProduct(any)).thenAnswer((_) async => productmodel);
       final result = await productrepoimp.createProduct(product);
@@ -92,7 +90,6 @@ void main() {
       expect(result, equals(const Left(ServerFailure())));
     });
   });
-
 
   group(' for update Product device is online', () {
     setUp(() {
@@ -133,9 +130,7 @@ void main() {
       when(mocknetwork.isConnected).thenAnswer((_) async => false);
     });
 
-    test(
-        'should return Failure',
-        () async {
+    test('should return Failure', () async {
       when(mockremote.updateProduct(any)).thenThrow(ServerException());
       when(mocklocal.cacheProduct(any)).thenAnswer((_) async => productmodel);
       final result = await productrepoimp.updateProduct(product);
@@ -183,19 +178,15 @@ void main() {
       when(mocknetwork.isConnected).thenAnswer((_) async => false);
     });
 
-
-    test(
-        'should return a product',
-        () async {
-      when(mocklocal.getLastProductModel()).thenAnswer((_) async => productmodel);
+    test('should return a product', () async {
+      when(mocklocal.getLastProductModel())
+          .thenAnswer((_) async => productmodel);
       final result = await productrepoimp.getProuduct(product.id);
       verifyZeroInteractions(mockremote);
       expect(result, equals(Right(product)));
-		});
+    });
 
-    test(
-        'should return Failure',
-        () async {
+    test('should return Failure', () async {
       when(mocklocal.getLastProductModel()).thenThrow(CacheException());
       final result = await productrepoimp.getProuduct(product.id);
       verifyZeroInteractions(mockremote);

@@ -6,7 +6,6 @@ import 'package:ecommerce/core/error/failure.dart';
 import 'package:ecommerce/features/product/domain/entities/product_ent.dart';
 import 'package:ecommerce/features/product/data/datasources/product_local_data_source.dart';
 import 'package:ecommerce/features/product/data/datasources/product_remote_data_source.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:ecommerce/core/platform/network_info.dart';
 
 class ProductRepositoryImp implements ProductRepositories {
@@ -19,7 +18,6 @@ class ProductRepositoryImp implements ProductRepositories {
     required this.remotedatasource,
     required this.networkinfo,
   });
-
 
   @override
   Future<Either<Failure, Product>> createProduct(Product product) async {

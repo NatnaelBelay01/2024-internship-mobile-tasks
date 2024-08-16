@@ -9,8 +9,6 @@ import 'package:ecommerce/features/product/data/datasources/product_remote_data_
     as _i3;
 import 'package:ecommerce/features/product/data/models/product_model.dart'
     as _i2;
-import 'package:ecommerce/features/product/domain/entities/product_ent.dart'
-    as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -46,7 +44,7 @@ class MockProductRemoteDataSource extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.ProductModel> createProduct(_i5.Product? product) =>
+  _i4.Future<_i2.ProductModel> createProduct(_i2.ProductModel? product) =>
       (super.noSuchMethod(
         Invocation.method(
           #createProduct,
@@ -62,7 +60,7 @@ class MockProductRemoteDataSource extends _i1.Mock
       ) as _i4.Future<_i2.ProductModel>);
 
   @override
-  _i4.Future<_i2.ProductModel> updateProduct(_i5.Product? product) =>
+  _i4.Future<_i2.ProductModel> updateProduct(_i2.ProductModel? product) =>
       (super.noSuchMethod(
         Invocation.method(
           #updateProduct,

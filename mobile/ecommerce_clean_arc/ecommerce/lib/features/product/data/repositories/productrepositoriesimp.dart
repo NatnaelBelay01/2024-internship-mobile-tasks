@@ -19,11 +19,21 @@ class ProductRepositoryImp implements ProductRepositories {
     required this.networkinfo,
   });
 
+  ProductModel changeToProductModel(Product product) {
+    return ProductModel(
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      imageurl: product.imageurl,
+      price: product.price,
+    );
+  }
+
   @override
   Future<Either<Failure, Product>> createProduct(Product product) async {
     if (await networkinfo.isConnected) {
       try {
-        ProductModel result = await remotedatasource.createProduct(product);
+        ProductModel result = await remotedatasource.createProduct(changeToProductModel(product));
         localdatasource.cacheProduct(result);
         Product newProduct = Product(
           id: result.id,
@@ -45,7 +55,7 @@ class ProductRepositoryImp implements ProductRepositories {
   Future<Either<Failure, Product>> updateProduct(Product product) async {
     if (await networkinfo.isConnected) {
       try {
-        ProductModel result = await remotedatasource.updateProduct(product);
+        ProductModel result = await remotedatasource.updateProduct(changeToProductModel(product));
         localdatasource.cacheProduct(result);
         Product newProduct = Product(
           id: result.id,
@@ -67,7 +77,7 @@ class ProductRepositoryImp implements ProductRepositories {
   Future<Either<Failure, void>> deleteProduct(String id) async {
     if (await networkinfo.isConnected) {
       try {
-        await remotedatasource.getProuduct(id);
+        await remotedatasource.deleteProduct(id);
         return const Right(null);
       } on ServerException {
         return const Left(ServerFailure());

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ecommerce/core/error/exception.dart';
 import 'package:ecommerce/features/product/data/models/product_model.dart';
 import 'package:http/http.dart' as http;
@@ -60,7 +62,7 @@ void main() {
       verify(mockclient.post(
           Uri.parse(
               'https://g5-flutter-learning-path-be.onrender.com/${productmodel.id}'),
-          body: productmodel,
+          body: json.encode(productmodel.toJson()),
           headers: {'Content-Type': 'application/json'}));
     });
 

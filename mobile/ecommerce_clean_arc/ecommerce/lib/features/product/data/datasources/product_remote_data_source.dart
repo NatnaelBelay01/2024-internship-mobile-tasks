@@ -23,7 +23,7 @@ class ProductRemoteDataSourceImp implements ProductRemoteDataSource {
     final result = await client.post(
         Uri.parse(
             'https://g5-flutter-learning-path-be.onrender.com/${product.id}'),
-        body: product,
+        body: json.encode(product.toJson()),
         headers: {'Content-Type': 'application/json'});
 		if (result.statusCode == 201){
     	return Future.value(ProductModel.fromJson(json.decode(result.body)));
@@ -34,7 +34,7 @@ class ProductRemoteDataSourceImp implements ProductRemoteDataSource {
 
   @override
   Future<ProductModel> updateProduct(ProductModel product) async {
-		final result = await client.put(Uri.parse('https://g5-flutter-learning-path-be.onrender.com/${product.id}'), headers: {'Content-Type': 'application/json'}, body: product);
+		final result = await client.put(Uri.parse('https://g5-flutter-learning-path-be.onrender.com/${product.id}'), headers: {'Content-Type': 'application/json'}, body: json.encode(product.toJson()));
 		if(result.statusCode == 204){
 			return Future.value(product);
 		} else{

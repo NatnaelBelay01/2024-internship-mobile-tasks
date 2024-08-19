@@ -15,7 +15,7 @@ void main(){
 		getproduct = GetProduct(productrepo: mockrepo);
 	});
 	
-	Product product = Product(id:'1', name:'shoe', description: 'a shoe', price: 342, imageurl: 'img/b.jpg');
+	Product product = const Product(id:'1', name:'shoe', description: 'a shoe', price: 342, imageurl: 'img/b.jpg');
 	const id = '1';
 	test('should use the repo to get the product', () async {  
 		

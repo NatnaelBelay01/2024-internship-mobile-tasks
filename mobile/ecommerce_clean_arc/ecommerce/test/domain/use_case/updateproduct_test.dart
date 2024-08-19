@@ -14,7 +14,7 @@ void main(){
 		updateprod = UpdateProduct(productRepo: mockrepo);
 	});
 
-	Product product = Product(id:'1', name:'shoe', description: 'a shoe', imageurl: 'img/b.jpg', price: 97);
+	Product product = const Product(id:'1', name:'shoe', description: 'a shoe', imageurl: 'img/b.jpg', price: 97);
 
 	test('a test for the update repo', () async {
 

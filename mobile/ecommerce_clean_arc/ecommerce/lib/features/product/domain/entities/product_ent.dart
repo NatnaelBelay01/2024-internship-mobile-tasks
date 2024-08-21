@@ -20,5 +20,6 @@ class Product extends Equatable {
         name,
         description,
         imageurl,
+				price,
       ];
 }

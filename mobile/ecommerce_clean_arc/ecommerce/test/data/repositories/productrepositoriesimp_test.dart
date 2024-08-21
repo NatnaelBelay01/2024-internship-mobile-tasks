@@ -16,13 +16,33 @@ void main() {
   late MockProductLocalDataSource mocklocal;
   late MockNetworkInfo mocknetwork;
   late Product product;
+  late ProductModel product2;
+  late List<ProductModel> productList;
+  late List<Product> checkValue;
   late ProductModel productmodel;
+
+  Product changetoEntity(ProductModel product) {
+    return Product(
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      imageurl: product.imageurl,
+      price: product.price,
+    );
+  }
 
   setUp(() {
     mockremote = MockProductRemoteDataSource();
     mocklocal = MockProductLocalDataSource();
     mocknetwork = MockNetworkInfo();
     product = const Product(
+      id: '1',
+      name: 'shoe',
+      description: 'a shoe',
+      price: 88,
+      imageurl: 'img/b.jpg',
+    );
+    product2 = const ProductModel(
       id: '1',
       name: 'shoe',
       description: 'a shoe',
@@ -41,6 +61,8 @@ void main() {
       price: 88,
       imageurl: 'img/b.jpg',
     );
+    productList = [productmodel, product2];
+    checkValue = [changetoEntity(productmodel), changetoEntity(product2)];
   });
 
   group(' for create Product device is online', () {
@@ -193,20 +215,49 @@ void main() {
       expect(result, equals(const Left(CacheFailure())));
     });
   });
-	group('delete product', () {
+
+  group(' for getallproduct Product device is online', () {
     setUp(() {
       when(mocknetwork.isConnected).thenAnswer((_) async => true);
     });
-	  test('should call the delete product method on the remote data source', () async {
-	    when(mockremote.deleteProduct(any)).thenAnswer((_) async => {});
-			await productrepoimp.deleteProduct(productmodel.id);
-			verify(mockremote.deleteProduct(any));
-	  });
-	});
-	group('delete product when the device is offline', () {
-	  setUp((){
-			when(mocknetwork.isConnected).thenAnswer((_) async => false);
-		});
+
+    test(
+        'should return remote data when the call to the remote data source is successfull',
+        () async {
+      when(mockremote.getallProuduct()).thenAnswer((_) async => productList);
+      final result = await productrepoimp.getallProuduct();
+      result.fold((f) {
+        throw (Exception());
+      }, (d) {
+        expect(d, containsAll(checkValue));
+      });
+    });
+
+    test(
+        'should rerturn server failure when the call to server is unsuccessfull',
+        () async {
+      when(mockremote.getallProuduct()).thenThrow(ServerException());
+      final result = await productrepoimp.getallProuduct();
+      verifyZeroInteractions(mocklocal);
+      expect(result, equals(const Left(ServerFailure())));
+    });
+  });
+
+  group('delete product', () {
+    setUp(() {
+      when(mocknetwork.isConnected).thenAnswer((_) async => true);
+    });
+    test('should call the delete product method on the remote data source',
+        () async {
+      when(mockremote.deleteProduct(any)).thenAnswer((_) async => {});
+      await productrepoimp.deleteProduct(productmodel.id);
+      verify(mockremote.deleteProduct(any));
+    });
+  });
+  group('delete product when the device is offline', () {
+    setUp(() {
+      when(mocknetwork.isConnected).thenAnswer((_) async => false);
+    });
 
     test('should return Failure', () async {
       when(mockremote.updateProduct(any)).thenThrow(ServerException());
@@ -214,5 +265,5 @@ void main() {
       verifyZeroInteractions(mockremote);
       expect(result, equals(const Left(ServerFailure())));
     });
-	});
+  });
 }

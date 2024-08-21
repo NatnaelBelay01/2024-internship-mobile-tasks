@@ -18,29 +18,29 @@ void main() {
     mockclient = MockClient();
     remotedataImp = ProductRemoteDataSourceImp(client: mockclient);
     productmodel = const ProductModel(
-      id: "01",
-      name: "shoe",
-      description: "a shoe",
-      imageurl: "img/b.jpg",
-      price: 34,
+      id: "6672776eb905525c145fe0bb",
+      name: "Anime website",
+      description: "Explore anime characters.",
+      price: 123,
+      imageurl: "https://res.cloudinary.com/g5-mobile-track/image/upload/v1718777711/images/clmxnecvavxfvrz9by4w.jpg"
     );
   });
 
   group('test for getproduct', () {
     test('Should perform a GET request on the url', () async {
       when(mockclient.get(any, headers: anyNamed('headers')))
-          .thenAnswer((_) async => http.Response(fixture('product.json'), 200));
+          .thenAnswer((_) async => http.Response(fixture('new.json'), 200));
       remotedataImp.getProuduct('01');
       verify(
         mockclient.get(
-            Uri.parse('https://g5-flutter-learning-path-be.onrender.com/01'),
+            Uri.parse('https://g5-flutter-learning-path-be.onrender.com/api/v1/products/01'),
             headers: {'Content-Type': 'application/json'}),
       );
     });
 
-    test('Should return ProducModel when the repose is successfull', () async {
+    test('Should return ProductModel when the repose is successfull', () async {
       when(mockclient.get(any, headers: anyNamed('headers')))
-          .thenAnswer((_) async => http.Response(fixture('product.json'), 200));
+          .thenAnswer((_) async => http.Response(fixture('new.json'), 200));
       final result = await remotedataImp.getProuduct('01');
       expect(result, productmodel);
     });
@@ -57,11 +57,11 @@ void main() {
     test('Should perform a post request', () async {
       when(mockclient.post(any,
               body: anyNamed('body'), headers: anyNamed('headers')))
-          .thenAnswer((_) async => http.Response(fixture('product.json'), 201));
+          .thenAnswer((_) async => http.Response(fixture('new.json'), 201));
       await remotedataImp.createProduct(productmodel);
       verify(mockclient.post(
           Uri.parse(
-              'https://g5-flutter-learning-path-be.onrender.com/${productmodel.id}'),
+              'https://g5-flutter-learning-path-be.onrender.com/api/v1/products/${productmodel.id}'),
           body: json.encode(productmodel.toJson()),
           headers: {'Content-Type': 'application/json'}));
     });
@@ -69,7 +69,7 @@ void main() {
     test('Should return a product model', () async {
       when(mockclient.post(any,
               body: anyNamed('body'), headers: anyNamed('headers')))
-          .thenAnswer((_) async => http.Response(fixture('product.json'), 201));
+          .thenAnswer((_) async => http.Response(fixture('new.json'), 201));
       final result = await remotedataImp.createProduct(productmodel);
       expect(result, productmodel);
     });

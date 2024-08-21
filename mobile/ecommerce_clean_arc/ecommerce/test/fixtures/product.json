@@ -2,6 +2,6 @@
 "id" : "01",
 "name" : "shoe",
 "description" : "a shoe",
-"imageurl" : "img/b.jpg",
+"imageUrl" : "img/b.jpg",
 "price" : 34
 }

@@ -29,19 +29,23 @@ class ProductRepositoryImp implements ProductRepositories {
     );
   }
 
+	Product changetoEntity(ProductModel product){
+    return Product(
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      imageurl: product.imageurl,
+      price: product.price,
+    );
+	}
+
   @override
   Future<Either<Failure, Product>> createProduct(Product product) async {
     if (await networkinfo.isConnected) {
       try {
         ProductModel result = await remotedatasource.createProduct(changeToProductModel(product));
         localdatasource.cacheProduct(result);
-        Product newProduct = Product(
-          id: result.id,
-          name: result.name,
-          description: result.description,
-          price: result.price,
-          imageurl: result.imageurl,
-        );
+				Product newProduct = changetoEntity(result);
         return Right(newProduct);
       } on ServerException {
         return const Left(ServerFailure());
@@ -57,13 +61,7 @@ class ProductRepositoryImp implements ProductRepositories {
       try {
         ProductModel result = await remotedatasource.updateProduct(changeToProductModel(product));
         localdatasource.cacheProduct(result);
-        Product newProduct = Product(
-          id: result.id,
-          name: result.name,
-          description: result.description,
-          price: result.price,
-          imageurl: result.imageurl,
-        );
+        Product newProduct = changetoEntity(result);
         return Right(newProduct);
       } on ServerException {
         return const Left(ServerFailure());
@@ -93,13 +91,7 @@ class ProductRepositoryImp implements ProductRepositories {
       try {
         ProductModel result = await remotedatasource.getProuduct(id);
         localdatasource.cacheProduct(result);
-        Product newProduct = Product(
-          id: result.id,
-          name: result.name,
-          description: result.description,
-          price: result.price,
-          imageurl: result.imageurl,
-        );
+        Product newProduct = changetoEntity(result);
         return Right(newProduct);
       } on ServerException {
         return const Left(ServerFailure());
@@ -107,16 +99,26 @@ class ProductRepositoryImp implements ProductRepositories {
     } else {
       try {
         final result = await localdatasource.getLastProductModel();
-        return Right(Product(
-          id: result.id,
-          name: result.name,
-          description: result.description,
-          price: result.price,
-          imageurl: result.imageurl,
-        ));
+				return Right(changetoEntity(result));
       } on CacheException {
         return const Left(CacheFailure());
       }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Product>>> getallProuduct() async {
+	
+    if (await networkinfo.isConnected) {
+      try {
+        List<ProductModel> result = await remotedatasource.getallProuduct();
+        List<Product> newProduct = result.map((value) => changetoEntity(value)).toList();
+        return Right(newProduct);
+      } on ServerException {
+        return const Left(ServerFailure());
+      }
+    } else {
+			return const Left(ServerFailure());
     }
   }
 }
